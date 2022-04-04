@@ -34,7 +34,7 @@ ham = axios.get('https://finance.naver.com/sise/',{responseType: 'arraybuffer',r
         stock_price_10 = $('#siselist_tab_7 > tbody > tr:nth-child(15) > td:nth-child(3)').text();
 
       router.get('/', function(req, res, next) {
-        res.render('index', { title: 'Express' });
+        res.render('index', { title: 'Stock ML' });
       });
     })
 
