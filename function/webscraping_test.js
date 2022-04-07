@@ -10,6 +10,7 @@ const getHtml = async () => {
     }
 };
 
+global.king
 ham = axios.get('https://finance.naver.com/sise/',{responseType: 'arraybuffer',responseEncoding: 'binary'})
     .then(resp => {
         const temp = iconv.decode(resp.data, "EUC-KR").toString();

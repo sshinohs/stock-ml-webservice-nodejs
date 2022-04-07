@@ -6,7 +6,7 @@ const cheerio = require('cheerio');
 const iconv = require('iconv-lite');
 
 
-ham = axios.get('https://finance.naver.com/sise/',{responseType: 'arraybuffer',responseEncoding: 'binary'})
+axios.get('https://finance.naver.com/sise/',{responseType: 'arraybuffer',responseEncoding: 'binary'})
     .then(resp => {
       const temp = iconv.decode(resp.data, "EUC-KR").toString();
       king = temp;
