@@ -25,7 +25,9 @@ router.post('/login_process', function(req,res){
         console.log(post);
         req.session.is_logined = true;
         req.session.nickname = authData.nickname;
-        res.redirect('/');
+        req.session.save(function(err) {
+            res.redirect(`/`);
+        })
     } else {
         console.log(post);
         res.send('Who?')
