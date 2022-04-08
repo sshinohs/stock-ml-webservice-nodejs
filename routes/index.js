@@ -34,7 +34,8 @@ axios.get('https://finance.naver.com/sise/',{responseType: 'arraybuffer',respons
         stock_price_10 = $('#siselist_tab_7 > tbody > tr:nth-child(15) > td:nth-child(3)').text();
 
       router.get('/', function(req, res, next) {
-        res.render('index', { title: 'Stock ML' });
+          console.log(req.session);
+          res.render('index', { title: 'Stock ML' });
       });
     })
 

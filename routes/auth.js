@@ -22,6 +22,7 @@ router.post('/login_process', function(req,res){
     var email = post.email;
     var password = post.pwd;
     if(email === authData.email  && password === authData.pwd) {
+        console.log(post);
         req.session.is_logined = true;
         req.session.nickname = authData.nickname;
         res.redirect('/');
