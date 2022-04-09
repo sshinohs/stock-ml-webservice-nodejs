@@ -7,9 +7,9 @@ const iconv = require('iconv-lite');
 
 function authIsOwner(req, res) {
     if(req.session.is_logined){
-        return `a(href="/auth/logout") logout`;
+        return `logout`;
     } else {
-        return `a(href="/auth/login") login`;
+        return `login`;
     }
 }
 
