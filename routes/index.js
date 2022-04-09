@@ -15,35 +15,22 @@ function authIsOwner(req, res) {
 
 axios.get('https://finance.naver.com/sise/',{responseType: 'arraybuffer',responseEncoding: 'binary'})
     .then(resp => {
+        const arrNumber = [3, 4, 5, 6, 7, 11, 12, 13, 14, 15]
+        let stock_name = []
+        let stock_price = []
+
       const temp = iconv.decode(resp.data, "EUC-KR").toString();
       king = temp;
       // console.log(king);
       $ = cheerio.load(king);
-      stock_name_1 = $('#siselist_tab_7 > tbody > tr:nth-child(3) > td:nth-child(2) > a').text();
-      stock_price_1 = $('#siselist_tab_7 > tbody > tr:nth-child(3) > td:nth-child(3)').text();
-        stock_name_2 = $('#siselist_tab_7 > tbody > tr:nth-child(4) > td:nth-child(2) > a').text();
-        stock_price_2 = $('#siselist_tab_7 > tbody > tr:nth-child(4) > td:nth-child(3)').text();
-        stock_name_3 = $('#siselist_tab_7 > tbody > tr:nth-child(5) > td:nth-child(2) > a').text();
-        stock_price_3 = $('#siselist_tab_7 > tbody > tr:nth-child(5) > td:nth-child(3)').text();
-        stock_name_4 = $('#siselist_tab_7 > tbody > tr:nth-child(6) > td:nth-child(2) > a').text();
-        stock_price_4 = $('#siselist_tab_7 > tbody > tr:nth-child(6) > td:nth-child(3)').text();
-        stock_name_5 = $('#siselist_tab_7 > tbody > tr:nth-child(7) > td:nth-child(2) > a').text();
-        stock_price_5 = $('#siselist_tab_7 > tbody > tr:nth-child(7) > td:nth-child(3)').text();
-        stock_name_6 = $('#siselist_tab_7 > tbody > tr:nth-child(11) > td:nth-child(2) > a').text();
-        stock_price_6 = $('#siselist_tab_7 > tbody > tr:nth-child(11) > td:nth-child(3)').text();
-        stock_name_7 = $('#siselist_tab_7 > tbody > tr:nth-child(12) > td:nth-child(2) > a').text();
-        stock_price_7 = $('#siselist_tab_7 > tbody > tr:nth-child(12) > td:nth-child(3)').text();
-        stock_name_8 = $('#siselist_tab_7 > tbody > tr:nth-child(13) > td:nth-child(2) > a').text();
-        stock_price_8 = $('#siselist_tab_7 > tbody > tr:nth-child(13) > td:nth-child(3)').text();
-        stock_name_9 = $('#siselist_tab_7 > tbody > tr:nth-child(14) > td:nth-child(2) > a').text();
-        stock_price_9 = $('#siselist_tab_7 > tbody > tr:nth-child(14) > td:nth-child(3)').text();
-        stock_name_10 = $('#siselist_tab_7 > tbody > tr:nth-child(15) > td:nth-child(2) > a').text();
-        stock_price_10 = $('#siselist_tab_7 > tbody > tr:nth-child(15) > td:nth-child(3)').text();
-
+      for (let i=0; i<arrNumber.length; i++) {
+          stock_name.push($(`#siselist_tab_7 > tbody > tr:nth-child(${arrNumber[i]}) > td:nth-child(2) > a`).text())
+          stock_price.push($(`#siselist_tab_7 > tbody > tr:nth-child(${arrNumber[i]}) > td:nth-child(3)`).text())
+      }
       router.get('/', function(req, res, next) {
           console.log(req.session);
           ham = authIsOwner(req, res);
-          res.render('index', { title: 'Stock ML', ham: ham });
+          res.render('index', { title: 'Stock ML', ham, stock_name, stock_price });
       });
     })
 

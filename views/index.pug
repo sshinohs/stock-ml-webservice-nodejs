@@ -9,33 +9,7 @@ block content
     tr
       th Name
       th Price
-    tr
-      th #{stock_name_1}
-      th #{stock_price_1}
-    tr
-      th #{stock_name_2}
-      th #{stock_price_2}
-    tr
-      th #{stock_name_3}
-      th #{stock_price_3}
-    tr
-      th #{stock_name_4}
-      th #{stock_price_4}
-    tr
-      th #{stock_name_5}
-      th #{stock_price_5}
-    tr
-      th #{stock_name_6}
-      th #{stock_price_6}
-    tr
-      th #{stock_name_7}
-      th #{stock_price_7}
-    tr
-      th #{stock_name_8}
-      th #{stock_price_8}
-    tr
-      th #{stock_name_9}
-      th #{stock_price_9}
-    tr
-      th #{stock_name_10}
-      th #{stock_price_10}
+    -for (var i = 0; i < stock_name.length; i++)
+            tr
+              th #{stock_name[i]}
+              th #{stock_price[i]}
