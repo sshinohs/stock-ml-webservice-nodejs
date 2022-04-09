@@ -5,6 +5,13 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 const iconv = require('iconv-lite');
 
+function authIsOwner(req, res) {
+    if(req.session.is_logined){
+        return `a(href="/auth/logout") logout`;
+    } else {
+        return `a(href="/auth/login") login`;
+    }
+}
 
 axios.get('https://finance.naver.com/sise/',{responseType: 'arraybuffer',responseEncoding: 'binary'})
     .then(resp => {
@@ -35,7 +42,8 @@ axios.get('https://finance.naver.com/sise/',{responseType: 'arraybuffer',respons
 
       router.get('/', function(req, res, next) {
           console.log(req.session);
-          res.render('index', { title: 'Stock ML' });
+          ham = authIsOwner(req, res);
+          res.render('index', { title: 'Stock ML', ham: ham });
       });
     })
 
