@@ -13,30 +13,23 @@ function authIsOwner(req, res) {
     }
 }
 
-axios.get('https://finance.naver.com/sise/',{responseType: 'arraybuffer',responseEncoding: 'binary'})
-    .then(resp => {
-        const arrNumber = [3, 4, 5, 6, 7, 11, 12, 13, 14, 15]
-        let stock_name = []
-        let stock_price = []
-
-      const temp = iconv.decode(resp.data, "EUC-KR").toString();
-      king = temp;
-      // console.log(king);
-      $ = cheerio.load(king);
-      for (let i=0; i<arrNumber.length; i++) {
-          stock_name.push($(`#siselist_tab_7 > tbody > tr:nth-child(${arrNumber[i]}) > td:nth-child(2) > a`).text())
-          stock_price.push($(`#siselist_tab_7 > tbody > tr:nth-child(${arrNumber[i]}) > td:nth-child(3)`).text())
-      }
-      router.get('/', function(req, res, next) {
-          console.log(req.session);
-          ham = authIsOwner(req, res);
-          res.render('index', { title: 'Stock ML', ham, stock_name, stock_price });
-      });
-    })
-
-/* GET home page. */
-// router.get('/', function(req, res, next) {
-//   res.render('index', { title: 'Express' });
-// });
+router.get('/', function(req, res, next) {
+    console.log(req.session);
+    const arrNumber = [3, 4, 5, 6, 7, 11, 12, 13, 14, 15]
+    let stock_name = []
+    let stock_price = []
+    axios.get('https://finance.naver.com/sise/',{responseType: 'arraybuffer',responseEncoding: 'binary'})
+        .then(resp => {
+            const temp = iconv.decode(resp.data, "EUC-KR").toString();
+            king = temp;
+            $ = cheerio.load(king);
+            for (let i=0; i<arrNumber.length; i++) {
+                stock_name.push($(`#siselist_tab_7 > tbody > tr:nth-child(${arrNumber[i]}) > td:nth-child(2) > a`).text())
+                stock_price.push($(`#siselist_tab_7 > tbody > tr:nth-child(${arrNumber[i]}) > td:nth-child(3)`).text())
+            }
+            ham = authIsOwner(req, res);
+            res.render('index', { title: 'Stock ML', ham, stock_name, stock_price });
+        })
+});
 
 module.exports = router;
