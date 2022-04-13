@@ -14,7 +14,6 @@ function authIsOwner(req, res) {
 }
 
 router.get('/', function(req, res, next) {
-    console.log(req.session);
     const arrNumber = [3, 4, 5, 6, 7, 11, 12, 13, 14, 15]
     let stock_name = []
     let stock_price = []
