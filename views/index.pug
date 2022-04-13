@@ -1,9 +1,12 @@
 extends layout
 
 block content
-  a(href=`/auth/${ham}`) #{ham}
+  a(href=`/auth/${isLogined}`) #{isLogined}
   h1= title
   p Welcome to #{title}
+  canvas(id='myChart' width='400' height='400')
+  script(src= 'https://cdn.jsdelivr.net/npm/chart.js')
+  script(src='javascripts/chartjs_test.js')
 
   table(style='width:20%', border='1')
     tr

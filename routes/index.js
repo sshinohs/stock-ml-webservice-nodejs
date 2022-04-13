@@ -26,8 +26,8 @@ router.get('/', function(req, res, next) {
                 stock_name.push($(`#siselist_tab_7 > tbody > tr:nth-child(${arrNumber[i]}) > td:nth-child(2) > a`).text())
                 stock_price.push($(`#siselist_tab_7 > tbody > tr:nth-child(${arrNumber[i]}) > td:nth-child(3)`).text())
             }
-            ham = authIsOwner(req, res);
-            res.render('index', { title: 'Stock ML', ham, stock_name, stock_price });
+            isLogined = authIsOwner(req, res);
+            res.render('index', { title: 'Stock ML', isLogined, stock_name, stock_price });
         })
 });
 
