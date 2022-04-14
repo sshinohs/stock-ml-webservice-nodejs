@@ -8,19 +8,17 @@ block content
   script(src= 'https://cdn.jsdelivr.net/npm/chart.js')
   //script(src= 'javascripts/chartjs_test.js')
   script.
-    let dataman = '#{JSON.stringify(data)}';
-    let ddong = !{JSON.stringify(data)};
-    // let ham = JSON.parse(dataman);
-    // stock_name='king';
-    // document.write(JSON.stringify(data));
-    // let hham = '#{hham}';
-    // document.write(hham);
-    // const ctx = document.getElementById('myChart');
-    // myChart = new Chart(ctx, {type: type, data: data, options: options});
-    document.write('#{type}');
-    document.write('#{JSON.stringify(data)}');
-    document.write('#{options}');
-    document.write(ddong);
+    let data = !{JSON.stringify(data)};
+    let type = !{JSON.stringify(type)};
+    let options = !{JSON.stringify(options)};
+    const ctx = document.getElementById('myChart');
+    myChart = new Chart(ctx, {type: type, data: data, options: options});
+    // document.write('#{type}');
+    // document.write('#{JSON.stringify(data)}');
+    // document.write('#{options}');
+    document.write(data);
+    document.write(type);
+    document.write(options);
 
 
 
