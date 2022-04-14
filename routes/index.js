@@ -18,22 +18,6 @@ let data = {
     datasets: [{
         label: 'Price',
         data: [12, 19, 3, 5, 2, 3],
-        backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(255, 206, 86, 0.2)',
-            'rgba(75, 192, 192, 0.2)',
-            'rgba(153, 102, 255, 0.2)',
-            'rgba(255, 159, 64, 0.2)'
-        ],
-        borderColor: [
-            'rgba(255, 99, 132, 1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(255, 206, 86, 1)',
-            'rgba(75, 192, 192, 1)',
-            'rgba(153, 102, 255, 1)',
-            'rgba(255, 159, 64, 1)'
-        ],
         borderWidth: 1
     }]
 }
@@ -66,6 +50,10 @@ router.get('/', function(req, res, next) {
                 stock_name.push($(`#siselist_tab_7 > tbody > tr:nth-child(${arrNumber[i]}) > td:nth-child(2) > a`).text())
                 stock_price.push($(`#siselist_tab_7 > tbody > tr:nth-child(${arrNumber[i]}) > td:nth-child(3)`).text())
             }
+            let stock_price2 = []
+            for(let i=0; i<stock_price.length; i++) {
+                stock_price2.push(stock_price[i].replace(/,/,''));
+            }
             res.locals.isLogined = authIsOwner(req, res);
             res.locals.stock_name = stock_name;
             res.locals.stock_price = stock_price;
@@ -73,6 +61,17 @@ router.get('/', function(req, res, next) {
             res.locals.type = type;
             res.locals.options = options;
             res.locals.hham = hham;
+            res.locals.stock_price2 = stock_price2;
+            let data_stock = {
+                labels: stock_name,
+                datasets: [{
+                    label: 'Price',
+                    data: stock_price2,
+                    borderWidth: 1
+                }]
+            }
+
+            res.locals.data_stock = data_stock;
             res.render('index', { title: 'Stock ML'});
         })
 });

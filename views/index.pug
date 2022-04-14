@@ -9,18 +9,11 @@ block content
   //script(src= 'javascripts/chartjs_test.js')
   script.
     let data = !{JSON.stringify(data)};
+    let data_stock = !{JSON.stringify(data_stock)};
     let type = !{JSON.stringify(type)};
     let options = !{JSON.stringify(options)};
     const ctx = document.getElementById('myChart');
-    myChart = new Chart(ctx, {type: type, data: data, options: options});
-    // document.write('#{type}');
-    // document.write('#{JSON.stringify(data)}');
-    // document.write('#{options}');
-    document.write(data);
-    document.write(type);
-    document.write(options);
-
-
+    myChart = new Chart(ctx, {type: type, data: data_stock});
 
   table(style='width:20%', border='1')
     tr
