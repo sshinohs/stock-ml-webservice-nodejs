@@ -48,24 +48,35 @@ router.get('/', function(req, res, next) {
             for(let i=0; i<stock_price.length; i++) {
                 stock_price2.push(stock_price[i].replace(/,/,''));
             }
+
             res.locals.isLogined = authIsOwner(req, res);
+
             res.locals.stock_name = stock_name;
             res.locals.stock_price = stock_price;
+
             res.locals.data = data;
+
             res.locals.type = type;
             res.locals.options = options;
+
             res.locals.stock_price2 = stock_price2;
-            let data_stock = {
-                labels: stock_name,
-                datasets: [{
-                    label: 'Price',
-                    data: stock_price2,
-                    borderWidth: 1
-                }]
-            }
 
             db.query(`SELECT * FROM stock_price`, function(err, prices) {
                 res.locals.prices = prices;
+                let stock_price_db = []
+                let stock_name_db = []
+                for(let i=0; i<prices.length; i++) {
+                    stock_price_db.push(prices[i].price)
+                    stock_name_db.push(prices[i].name)
+                }
+                let data_stock = {
+                    labels: stock_name_db,
+                    datasets: [{
+                        label: 'Price',
+                        data: stock_price_db,
+                        borderWidth: 1
+                    }]
+                }
                 res.locals.data_stock = data_stock;
                 res.render('index', { title: 'Stock ML'});
             })
