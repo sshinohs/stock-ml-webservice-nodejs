@@ -9,4 +9,4 @@ gen
 node_modules
 sessions
 nodejs/mysql.js
-lib
+lib/db.js
