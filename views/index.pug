@@ -8,23 +8,12 @@ block content
     canvas(id='myChart' width='400' height='400')
     script(src= 'https://cdn.jsdelivr.net/npm/chart.js')
     script.
-      let data = !{JSON.stringify(data)};
       let data_stock = !{JSON.stringify(data_stock)};
       let type = !{JSON.stringify(type)};
       let options = !{JSON.stringify(options)};
       const ctx = document.getElementById('myChart');
       myChart = new Chart(ctx, {type: type, data: data_stock});
 
-  p Directly Scraped
-  table(style='width:20%', border='1')
-    tr
-      th Name
-      th Price
-    -for (var i = 0; i < stock_name.length; i++)
-            tr
-              th #{stock_name[i]}
-              th #{stock_price[i]}
-  p
   p From Database
   table(style='width:20%', border='1')
     tr
