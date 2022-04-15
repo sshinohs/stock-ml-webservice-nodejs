@@ -15,6 +15,7 @@ block content
     const ctx = document.getElementById('myChart');
     myChart = new Chart(ctx, {type: type, data: data_stock});
 
+  p Directly Scraped
   table(style='width:20%', border='1')
     tr
       th Name
@@ -23,3 +24,13 @@ block content
             tr
               th #{stock_name[i]}
               th #{stock_price[i]}
+  p
+  p From Database
+  table(style='width:20%', border='1')
+    tr
+      th Name
+      th Price
+    -for (var i = 0; i < prices.length; i++)
+        tr
+          th #{prices[i].name}
+          th #{prices[i].price.toLocaleString('ko-KR')} 원

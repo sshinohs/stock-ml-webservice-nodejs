@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+const db = require('../lib/db.js');
 
 const axios = require('axios');
 const cheerio = require('cheerio');
@@ -30,13 +31,6 @@ let options = {
         }
     }
 }
-
-let hham = JSON.parse(JSON.stringify(data))
-
-// const ctx = document.getElementById('myChart');
-// const myChart = new Chart(ctx, {type: type, data: data, options: options});
-
-
 router.get('/', function(req, res, next) {
     const arrNumber = [3, 4, 5, 6, 7, 11, 12, 13, 14, 15]
     let stock_name = []
@@ -60,7 +54,6 @@ router.get('/', function(req, res, next) {
             res.locals.data = data;
             res.locals.type = type;
             res.locals.options = options;
-            res.locals.hham = hham;
             res.locals.stock_price2 = stock_price2;
             let data_stock = {
                 labels: stock_name,
@@ -71,8 +64,11 @@ router.get('/', function(req, res, next) {
                 }]
             }
 
-            res.locals.data_stock = data_stock;
-            res.render('index', { title: 'Stock ML'});
+            db.query(`SELECT * FROM stock_price`, function(err, prices) {
+                res.locals.prices = prices;
+                res.locals.data_stock = data_stock;
+                res.render('index', { title: 'Stock ML'});
+            })
         })
 });
 
